@@ -1,5 +1,6 @@
 class PostsController < ApplicationController
 	before_action :find_post, only: [:edit, :update, :show, :delete]
+	before_action :authenticate_admin!, except: [:index, :show]
 
 	# Index action to render all posts
 	def index
@@ -28,14 +29,15 @@ class PostsController < ApplicationController
 	end
 
 	# Update action updates the post with the new information
-	def update
+	def update 
+		
 		if @post.update_attributes(post_params)
-			flash[:notice] = "Successfully updated post!"
-			redirect_to post_path(@posts)
-		else
+			redirect_to post_path(@post) 
+			# redirect_to(:action => 'posts#show') 
+		else 
 			flash[:alert] = "Error updating post!"
-			render :edit
-		end
+			render 'edit' 
+		end 
 	end
 
 	# The show action renders the individual post after retrieving the the id
@@ -44,12 +46,9 @@ class PostsController < ApplicationController
 
 	# The destroy action removes the post permanently from the database
 	def destroy
-		if @post.destroy
-			flash[:notice] = "Successfully deleted post!"
-			redirect_to posts_path
-		else
-			flash[:alert] = "Error updating post!"
-		end
+		@post = Post.find(params[:id])
+    	@post.delete
+    	redirect_to :back
 	end
 
 	private
@@ -61,4 +60,5 @@ class PostsController < ApplicationController
 	def find_post
 		@post = Post.find(params[:id])
 	end
+
 end
