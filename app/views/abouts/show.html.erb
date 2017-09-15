@@ -1,12 +1,19 @@
+<header class="header" style="color:white;margin-top:-20px;padding-bottom:300px;background-image: url('/images/bg.jpg');background-position: center;-webkit-background-size: cover">
+	<div class="container text-center">        
+    	<div class="col-sm-offset-1 col-sm-10">
+        	<div class="site-heading">
+             </div>
+		</div>
+    </div>        
+</header>
 <div class="col-sm-6 col-sm-offset-3 col-xs-12">
-  <h2 class="text-center"><%= @post.title %></h2>
-  <h5 class="text-center"><%= @post.created_at.strftime('%b %d, %Y') %></h5>
-  <div><%= raw @post.body %></div>
-  <% if admin_signed_in? %>
-        
-        <%= link_to "Edit", edit_post_path(@post), class: "btn btn-default" %>
-        <%= link_to "Delete", post_path(@post), class: "btn btn-danger", data: {:confirm => "Are you sure?"}, method: :delete %>
- <% end %>
+  <h2 class="text-center"><%= @about.title %></h2>
+  <div><%= raw @about.body %></div>
+<% if admin_signed_in? %>
+		<%= link_to "Edit", edit_about_path(@about), class: "btn btn-default" %>
+		
+  <% end %>
+
 </div>
 
  <footer>
@@ -24,3 +31,5 @@
         </div>
       </div>
     </footer>
+
+
