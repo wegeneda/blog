@@ -4,6 +4,7 @@ class Post < ActiveRecord::Base
   #This validates presence of body
   validates :body, presence: true
   def self.search(search)
-  	 where("body LIKE ?", "%#{search}%")
+  	 where("body LIKE ?", "%#{search}%" )
+  	 where("title LIKE ?", "%#{search}%")
    end
 end

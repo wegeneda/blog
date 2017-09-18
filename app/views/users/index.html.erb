@@ -1,0 +1,25 @@
+<% if admin_signed_in? %>
+  <h1>Users</h1>
+  <%= link_to "All Users", :action => "index" %>
+  |
+  <%= link_to "Users awaiting approval", :action => "index", :approved => "false" %>
+  <table>
+    <% @admins.each do |admin| %>
+      <tr>
+        <td>
+          <%= admin.email %>
+        </td>
+        <td>
+          <%= admin.approved %>
+        </td>
+        <td>
+          <%= form_tag :controller=> 'users', :action=> 'confirm_user', :id => admin.id, :method => :post do  %>
+          <%= submit_tag 'Accept user', class: "btn btn-success" %>
+        <% end %>
+        </td>
+      </tr>
+    <% end %>
+  </table>
+<% else %>
+  This page is admin protected
+<% end %>

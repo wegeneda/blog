@@ -8,7 +8,8 @@ class UsersController < ApplicationController
   	end
 	def confirm_user
 	    @admins = Admin.find(params[:id])
-    	@admins.update_attribute :approved, params[:approve]
+    	@admins.update_attributes!(approved: true)
+      redirect_to :back
 	end
 	def show
 	end
